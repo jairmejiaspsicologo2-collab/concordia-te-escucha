@@ -5,6 +5,7 @@ Prototipo web para diagnóstico territorial e intersectorial de salud mental en 
 Incluye:
 
 - Tablero con indicadores públicos SISPRO para Concordia.
+- Validación local de una IPS municipal: ESE Hospital Local de Concordia.
 - Carga de archivos CSV anónimos para el periodo 2020-2026.
 - Validación básica para evitar campos identificables.
 - Vista territorial con Google Maps.

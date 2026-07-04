@@ -13,6 +13,8 @@ const municipalProfile = {
   ipsPublicas2023: 4,
   ipsPrivadas2023: 1,
   totalIps2023: 5,
+  ipsLocalValidada: 1,
+  ipsReferencia: "ESE Hospital Local de Concordia",
   afiliadosSubsidiado2023: 9440,
   afiliadosContributivo2023: 366,
   afiliadosExcepcion2023: 7,
@@ -78,18 +80,18 @@ const officialSources = [
   },
   {
     name: "SIHO",
-    use: "Gestión hospitalaria de ESE: producción, atenciones, capacidad, finanzas y administración.",
-    level: "Hospital público / ESE",
+    use: "Gestión hospitalaria de la ESE Hospital Local de Concordia: producción, atenciones, capacidad, finanzas y administración.",
+    level: "Única IPS/ESE municipal validada",
     access: "Público e institucional según consulta",
-    status: "Pendiente: cruce con hospital/ESE",
+    status: "Pendiente: cruce con ESE Hospital Local de Concordia",
     tags: ["ESE", "Producción", "Gestión"]
   },
   {
     name: "REPS / RETHUS",
-    use: "Oferta de servicios habilitados y talento humano disponible para rutas de salud mental.",
-    level: "Prestador, servicio y profesional",
+    use: "Validación de servicios habilitados y talento humano disponible en la ESE Hospital Local de Concordia.",
+    level: "Prestador local de referencia",
     access: "Consulta pública",
-    status: "Pendiente: consulta de red local",
+    status: "Validar contra REPS: una IPS local reportada por el municipio",
     tags: ["Oferta", "Servicios", "Red"]
   },
   {
@@ -185,13 +187,13 @@ function renderMetrics(records) {
     cards[0].querySelector("small").textContent = "Proyección municipal SISPRO/DANE 2023";
     cards[1].querySelector("span").textContent = "Población rural";
     cards[1].querySelector("small").textContent = "Resto municipal 2023";
-    cards[2].querySelector("span").textContent = "Total IPS";
-    cards[2].querySelector("small").textContent = "Oferta registrada en ficha territorial";
+    cards[2].querySelector("span").textContent = "IPS local";
+    cards[2].querySelector("small").textContent = municipalProfile.ipsReferencia;
     cards[3].querySelector("span").textContent = "Afiliación";
     cards[3].querySelector("small").textContent = "Total afiliados 2023";
     document.querySelector("#totalCases").textContent = formatNumber(municipalProfile.poblacion2023);
     document.querySelector("#highRisk").textContent = formatNumber(municipalProfile.resto2023);
-    document.querySelector("#activeZones").textContent = formatNumber(municipalProfile.totalIps2023);
+    document.querySelector("#activeZones").textContent = formatNumber(municipalProfile.ipsLocalValidada);
     document.querySelector("#ruralShare").textContent = formatNumber(municipalProfile.totalAfiliados2023);
     return;
   }
@@ -293,8 +295,8 @@ function renderDiagnosis(records) {
       ["Población total 2023", municipalProfile.poblacion2023],
       ["Resto rural 2023", municipalProfile.resto2023],
       ["Total afiliados 2023", municipalProfile.totalAfiliados2023],
-      ["IPS públicas 2023", municipalProfile.ipsPublicas2023],
-      ["IPS privadas 2023", municipalProfile.ipsPrivadas2023],
+      ["IPS local validada", municipalProfile.ipsLocalValidada],
+      ["Prestador de referencia", municipalProfile.ipsReferencia],
       ["Mortalidad general 2021", municipalProfile.mortalidadGeneral[1].valor]
     ];
     document.querySelector("#diagnosisList").innerHTML = indicators.map(([name, value]) => `
@@ -317,7 +319,7 @@ function renderTable(records) {
         <td>Concordia</td>
         <td>-</td>
         <td>SISPRO</td>
-        <td>Base pública cargada: ficha territorial municipal. Pendiente cargar registros anónimos 2020-2026 de las demás fuentes.</td>
+        <td>Base pública cargada y validación local: la IPS municipal de referencia es la ESE Hospital Local de Concordia.</td>
         <td><span class="risk-pill risk-Bajo">Oficial</span></td>
       </tr>
     `;
@@ -425,7 +427,7 @@ function renderReport(records) {
     <p>Con los filtros actuales se revisan <strong>${total}</strong> registros relacionados con salud mental en Concordia, Magdalena, para el periodo 2020-2026.</p>
     <p>Se identifican <strong>${high}</strong> registros de riesgo alto. La zona con más registros es <strong>${topZone ? topZone[0] : "sin datos"}</strong> y la señal más frecuente es <strong>${topDx ? topDx[0] : "sin datos"}</strong>.</p>
     <p>El <strong>${total ? Math.round((rural / total) * 100) : 0}%</strong> de los registros proviene de zonas fuera de cabecera. Esto debe leerse junto con barreras de transporte, distancia y acceso real a consulta.</p>
-    <p>Recomendación inicial: priorizar búsqueda activa y encuesta comunitaria en corregimientos con registros de alto riesgo o con bajo registro hospitalario.</p>
+    <p>Recomendación inicial: priorizar búsqueda activa y encuesta comunitaria en corregimientos con registros de alto riesgo o con bajo registro en la ESE Hospital Local de Concordia.</p>
   `;
 }
 
