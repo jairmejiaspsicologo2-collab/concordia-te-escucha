@@ -25,7 +25,7 @@
       </nav>
       <div class="sidebar-note">
         <strong>Base pública cargada</strong>
-        <span>Indicadores SISPRO 2023 para Concordia, Magdalena. Las demás fuentes se cargan con archivos oficiales anonimizados.</span>
+        <span>Base pública SISPRO disponible y carga anónima 2020-2026 para las demás fuentes.</span>
       </div>
     </aside>
 
@@ -242,11 +242,11 @@
               Cuando tengas la base filtrada, podemos adaptarla a tus columnas reales.
               Puedes cargar un CSV agregado o anonimizado con columnas como:
               fuente, fecha, edad, sexo, zona, servicio, diagnostico, riesgo, lat, lng.
-              La app solo acepta registros desde 2020 y bloquea columnas identificables.
+              La app solo acepta registros entre 2020 y 2026, y bloquea columnas identificables.
             </p>
             <div class="download-row">
               <a class="map-link" href="concordia_sispro_indicadores_2020_2023.csv" download>Descargar SISPRO cargado</a>
-              <a class="map-link secondary-link" href="plantilla_datos_anonimos_2020.csv" download>Plantilla 2020+</a>
+              <a class="map-link secondary-link" href="plantilla_datos_anonimos_2020_2026.csv" download>Plantilla 2020-2026</a>
             </div>
             <label class="file-drop">
               <input id="fileInput" type="file" accept=".csv" />
@@ -271,7 +271,7 @@
               <li>Remisión, control o seguimiento</li>
               <li>Fuente: RIPS, SI-APS, SIVIGILA, SIHO, hospital o encuesta</li>
               <li>Latitud y longitud, si la entidad las tiene disponibles</li>
-              <li>Periodo mínimo: 2020 en adelante</li>
+              <li>Periodo permitido: 2020 a 2026</li>
               <li>No incluir nombres, documentos, teléfonos, direcciones ni historias clínicas</li>
             </ul>
           </article>
@@ -371,6 +371,6 @@
       </section>
     </main>
 
-    <script src="app.js?v=20260704-real-2020"></script>
+    <script src="app.js?v=20260704-real-2026"></script>
   </body>
 </html>

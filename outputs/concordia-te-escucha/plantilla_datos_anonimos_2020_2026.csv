@@ -1,6 +1,6 @@
 fuente,fecha,edad,sexo,zona,servicio,diagnostico,riesgo,lat,lng,conteo,nota
 Hospital local,2020-01-01,0,Sin dato,Cabecera municipal,Consulta externa,Evento agregado,Bajo,,,1,Ejemplo de estructura sin nombre ni documento
-Hospital local,2026-06-30,0,Sin dato,Sin zona,Urgencias,Evento agregado,Medio,,,1,Usar datos anonimos o agregados con corte 2026
+Hospital local,2026-06-30,0,Sin dato,Sin zona,Urgencias,Evento agregado,Medio,,,1,Usar datos agregados o anonimos con corte 2026
 ICBF,2026-06-30,0,Sin dato,Sin zona,Proteccion,Reporte agregado,Medio,,,1,No incluir nombres de niñas niños adolescentes ni acudientes
 Comisaria de Familia,2026-06-30,0,Sin dato,Sin zona,Medida de proteccion,Violencia intrafamiliar,Alto,,,1,No incluir victima agresor documento direccion ni expediente
 Policia Nacional,2026-06-30,0,Sin dato,Sin zona,Convivencia,Reporte agregado,Medio,,,1,No incluir direccion exacta ni identificadores

@@ -3,7 +3,8 @@ const municipalProfile = {
   municipio: "Concordia",
   departamento: "Magdalena",
   codigo: "47205",
-  periodoBase: "2020-2023",
+  periodoBase: "2020-2026",
+  corteSolicitado: "2026",
   poblacion2023: 11618,
   cabecera2023: 4328,
   resto2023: 7290,
@@ -48,6 +49,7 @@ const riskColors = {
 
 const defaultMapQuery = "Concordia, Magdalena, Colombia";
 const minAnonymousYear = 2020;
+const maxAnonymousYear = 2026;
 
 const officialSources = [
   {
@@ -55,7 +57,7 @@ const officialSources = [
     use: "Atenciones en salud, RIPS, aseguramiento, ficha municipal, prestadores, indicadores y visor geográfico.",
     level: "Municipal y departamental",
     access: "Público y consultas institucionales",
-    status: "Cargado: ficha territorial 2020-2023",
+    status: "Cargado: ficha territorial pública disponible; complementar 2024-2026 con fuentes anónimas",
     tags: ["RIPS", "Indicadores", "Mapas"]
   },
   {
@@ -63,7 +65,7 @@ const officialSources = [
     use: "Información de Atención Primaria en Salud: componente poblacional nominal, gestión técnica y financiero.",
     level: "Personas, familias y comunidad",
     access: "Requiere usuario institucional para datos nominales",
-    status: "Pendiente: exporte anónimo desde 2020",
+    status: "Pendiente: exporte anónimo 2020-2026",
     tags: ["APS", "Nominal", "Territorio"]
   },
   {
@@ -71,7 +73,7 @@ const officialSources = [
     use: "Eventos de interés en salud pública: intento de suicidio, violencias y otros eventos vigilados.",
     level: "Evento, semana epidemiológica y territorio",
     access: "Reportes públicos y gestión territorial",
-    status: "Pendiente: reporte agregado desde 2020",
+    status: "Pendiente: reporte agregado 2020-2026",
     tags: ["Vigilancia", "Alertas", "Eventos"]
   },
   {
@@ -95,7 +97,7 @@ const officialSources = [
     use: "ASIS, PIC, vigilancia departamental, red de prestación, reportes de salud pública y planes territoriales.",
     level: "Magdalena y municipios",
     access: "Solicitud formal o datos abiertos disponibles",
-    status: "Pendiente: datos departamentales desde 2020",
+    status: "Pendiente: datos departamentales 2020-2026",
     tags: ["ASIS", "PIC", "Departamento"]
   },
   {
@@ -119,7 +121,7 @@ const officialSources = [
     use: "PIC, programas sociales, educación, adulto mayor, juventud, discapacidad, comunidad rural y rutas locales de atención.",
     level: "Municipio, corregimiento y vereda",
     access: "Gestión municipal directa",
-    status: "Pendiente: programas desde 2020",
+    status: "Pendiente: programas 2020-2026",
     tags: ["PIC", "Programas", "Rutas"]
   },
   {
@@ -127,7 +129,7 @@ const officialSources = [
     use: "Llamadas, reportes y casos asociados a convivencia, violencia, lesiones, consumo, riñas, riesgo suicida y activación de rutas.",
     level: "Evento, zona y convivencia",
     access: "Reporte agregado por coordinación institucional",
-    status: "Pendiente: reporte agregado desde 2020",
+    status: "Pendiente: reporte agregado 2020-2026",
     tags: ["Convivencia", "Alertas", "Seguridad"]
   }
 ];
@@ -195,7 +197,7 @@ function renderMetrics(records) {
   }
 
   cards[0].querySelector("span").textContent = "Atenciones revisadas";
-  cards[0].querySelector("small").textContent = "Registros anónimos desde 2020";
+  cards[0].querySelector("small").textContent = "Registros anónimos 2020-2026";
   cards[1].querySelector("span").textContent = "Riesgo alto";
   cards[1].querySelector("small").textContent = "Priorizan seguimiento humano";
   cards[2].querySelector("span").textContent = "Zonas reportadas";
@@ -315,7 +317,7 @@ function renderTable(records) {
         <td>Concordia</td>
         <td>-</td>
         <td>SISPRO</td>
-        <td>Base pública cargada: ficha territorial municipal. Pendiente cargar registros anónimos 2020+ de las demás fuentes.</td>
+        <td>Base pública cargada: ficha territorial municipal. Pendiente cargar registros anónimos 2020-2026 de las demás fuentes.</td>
         <td><span class="risk-pill risk-Bajo">Oficial</span></td>
       </tr>
     `;
@@ -420,7 +422,7 @@ function renderReport(records) {
   const rural = records.filter((item) => item.zona !== "Cabecera municipal").length;
 
   document.querySelector("#reportText").innerHTML = `
-    <p>Con los filtros actuales se revisan <strong>${total}</strong> registros relacionados con salud mental en Concordia, Magdalena.</p>
+    <p>Con los filtros actuales se revisan <strong>${total}</strong> registros relacionados con salud mental en Concordia, Magdalena, para el periodo 2020-2026.</p>
     <p>Se identifican <strong>${high}</strong> registros de riesgo alto. La zona con más registros es <strong>${topZone ? topZone[0] : "sin datos"}</strong> y la señal más frecuente es <strong>${topDx ? topDx[0] : "sin datos"}</strong>.</p>
     <p>El <strong>${total ? Math.round((rural / total) * 100) : 0}%</strong> de los registros proviene de zonas fuera de cabecera. Esto debe leerse junto con barreras de transporte, distancia y acceso real a consulta.</p>
     <p>Recomendación inicial: priorizar búsqueda activa y encuesta comunitaria en corregimientos con registros de alto riesgo o con bajo registro hospitalario.</p>
@@ -480,7 +482,7 @@ function parseCsv(text) {
     const row = Object.fromEntries(headers.map((header, index) => [header, values[index] || ""]));
     const fecha = row.fecha || row.date || row.periodo || "2020-01-01";
     const year = Number(String(fecha).slice(0, 4));
-    if (Number.isFinite(year) && year < minAnonymousYear) return null;
+    if (Number.isFinite(year) && (year < minAnonymousYear || year > maxAnonymousYear)) return null;
     return {
       fecha,
       zona: row.zona || row.corregimiento || row.vereda || "Sin zona",
@@ -508,7 +510,7 @@ document.querySelector("#resetData").addEventListener("click", () => {
   cases = [];
   setupFilters();
   renderAll();
-  document.querySelector("#uploadStatus").textContent = "Indicadores públicos SISPRO restaurados. Carga archivos anónimos 2020+ para reemplazar esta base.";
+  document.querySelector("#uploadStatus").textContent = "Indicadores públicos SISPRO restaurados. Carga archivos anónimos 2020-2026 para complementar esta base.";
 });
 
 document.querySelector("#fileInput").addEventListener("change", async (event) => {
@@ -519,7 +521,7 @@ document.querySelector("#fileInput").addEventListener("change", async (event) =>
     cases = parseCsv(text);
     setupFilters();
     renderAll();
-    document.querySelector("#uploadStatus").textContent = `Archivo anónimo cargado: ${file.name}. Registros desde 2020 leídos: ${cases.length}.`;
+    document.querySelector("#uploadStatus").textContent = `Archivo anónimo cargado: ${file.name}. Registros 2020-2026 leídos: ${cases.length}.`;
     changeView("dashboard");
   } catch (error) {
     document.querySelector("#uploadStatus").textContent = error.message;
