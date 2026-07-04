@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Concordia Te Escucha</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">CTE</div>
+        <div>
+          <strong>Concordia Te Escucha</strong>
+          <span>Salud mental territorial</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboard">Tablero</button>
+        <button class="nav-item" data-view="territorio">Territorio</button>
+        <button class="nav-item" data-view="fuentes">Fuentes</button>
+        <button class="nav-item" data-view="cargar">Cargar datos</button>
+        <button class="nav-item" data-view="encuesta">Encuesta</button>
+        <button class="nav-item" data-view="informe">Informe</button>
+      </nav>
+      <div class="sidebar-note">
+        <strong>Base pública cargada</strong>
+        <span>Indicadores SISPRO 2023 para Concordia, Magdalena. Las demás fuentes se cargan con archivos oficiales anonimizados.</span>
+      </div>
+    </aside>
+
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Concordia, Magdalena</p>
+          <h1>Diagnóstico municipal de salud mental</h1>
+        </div>
+        <div class="top-actions">
+          <button class="ghost-button" id="resetData">Restaurar SISPRO</button>
+          <button class="primary-button" data-view-link="cargar">Cargar base</button>
+        </div>
+      </header>
+
+      <section class="filters">
+        <label>
+          Zona
+          <select id="zoneFilter">
+            <option value="all">Todas</option>
+          </select>
+        </label>
+        <label>
+          Grupo de edad
+          <select id="ageFilter">
+            <option value="all">Todos</option>
+            <option value="0-17">0 a 17</option>
+            <option value="18-28">18 a 28</option>
+            <option value="29-59">29 a 59</option>
+            <option value="60+">60 o más</option>
+          </select>
+        </label>
+        <label>
+          Servicio
+          <select id="serviceFilter">
+            <option value="all">Todos</option>
+          </select>
+        </label>
+        <label>
+          Riesgo
+          <select id="riskFilter">
+            <option value="all">Todos</option>
+            <option value="Alto">Alto</option>
+            <option value="Medio">Medio</option>
+            <option value="Bajo">Bajo</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="view active" id="dashboard">
+        <div class="metric-grid">
+          <article class="metric-card">
+            <span>Población total</span>
+            <strong id="totalCases">0</strong>
+            <small>Proyección municipal SISPRO/DANE 2023</small>
+          </article>
+          <article class="metric-card">
+            <span>Población rural</span>
+            <strong id="highRisk">0</strong>
+            <small>Resto municipal</small>
+          </article>
+          <article class="metric-card">
+            <span>Total IPS</span>
+            <strong id="activeZones">0</strong>
+            <small>Oferta registrada en ficha territorial</small>
+          </article>
+          <article class="metric-card">
+            <span>Afiliación</span>
+            <strong id="ruralShare">0%</strong>
+            <small>Total afiliados 2023</small>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="panel wide">
+            <div class="panel-heading">
+              <h2>Casos por mes</h2>
+              <span>O registros cargados por entidad</span>
+            </div>
+            <div class="bar-chart" id="monthChart"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Principales señales</h2>
+              <span>Riesgo o aseguramiento</span>
+            </div>
+            <div class="donut-wrap">
+              <div class="donut" id="riskDonut"></div>
+              <div class="legend" id="riskLegend"></div>
+            </div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Diagnósticos frecuentes</h2>
+              <span>CIE-10 o indicadores oficiales</span>
+            </div>
+            <div class="rank-list" id="diagnosisList"></div>
+          </article>
+          <article class="panel wide">
+            <div class="panel-heading">
+              <h2>Registros recientes</h2>
+              <span>Agregado sin nombres ni documentos</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Zona</th>
+                    <th>Edad</th>
+                    <th>Servicio</th>
+                    <th>Señal</th>
+                    <th>Riesgo</th>
+                  </tr>
+                </thead>
+                <tbody id="caseTable"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="territorio">
+        <div class="territory-layout">
+          <article class="panel map-panel">
+            <div class="panel-heading">
+              <h2>Google Maps territorial</h2>
+              <span>Concordia, Magdalena</span>
+            </div>
+            <div class="google-map-shell">
+              <iframe
+                id="googleMapFrame"
+                title="Mapa de Concordia, Magdalena"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Concordia%2C%20Magdalena%2C%20Colombia&output=embed">
+              </iframe>
+            </div>
+            <div class="map-actions">
+              <a class="map-link" id="openGoogleMaps" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=Concordia%2C%20Magdalena%2C%20Colombia">Abrir en Google Maps</a>
+              <span id="mapHint">Selecciona una zona para acercar el mapa.</span>
+            </div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Zonas para priorizar</h2>
+              <span>No todo bajo registro significa bajo riesgo</span>
+            </div>
+            <div class="priority-list" id="priorityList"></div>
+          </article>
+          <article class="panel wide territory-reading">
+            <div class="panel-heading">
+              <h2>Lectura territorial</h2>
+              <span>Distancia, acceso y registros</span>
+            </div>
+            <div class="territory-map" id="territoryMap"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="fuentes">
+        <div class="sources-layout">
+          <article class="panel wide">
+            <div class="panel-heading">
+              <h2>Fuentes oficiales e intersectoriales</h2>
+              <span>Salud, protección, convivencia y territorio</span>
+            </div>
+            <div class="source-grid" id="sourceGrid"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Ruta de integración</h2>
+              <span>De lo institucional a lo comunitario</span>
+            </div>
+            <ol class="timeline-list">
+              <li>Consultar indicadores públicos nacionales, departamentales y municipales.</li>
+              <li>Solicitar al hospital exportes internos sin nombres para análisis inicial.</li>
+              <li>Cruzar RIPS, SI-APS, SIVIGILA, SIHO y reportes departamentales por periodo, zona y evento.</li>
+              <li>Integrar reportes agregados de ICBF, comisaría, secretaría municipal y Policía Nacional.</li>
+              <li>Completar vacíos rurales con encuesta comunitaria offline y entrevistas de actores clave.</li>
+              <li>Publicar tablero agregado sin nombres, documentos, historias clínicas ni datos de víctimas.</li>
+            </ol>
+          </article>
+          <article class="panel wide">
+            <div class="panel-heading">
+              <h2>Matriz de cruce</h2>
+              <span>Qué aporta cada plataforma</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Fuente</th>
+                    <th>Útil para</th>
+                    <th>Nivel</th>
+                    <th>Acceso</th>
+                  </tr>
+                </thead>
+                <tbody id="sourceTable"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="cargar">
+        <div class="upload-layout">
+          <article class="panel upload-panel">
+            <div class="panel-heading">
+              <h2>Cargar base del hospital</h2>
+              <span>Primera versión compatible con CSV</span>
+            </div>
+            <p>
+              Cuando tengas la base filtrada, podemos adaptarla a tus columnas reales.
+              Puedes cargar un CSV agregado o anonimizado con columnas como:
+              fuente, fecha, edad, sexo, zona, servicio, diagnostico, riesgo, lat, lng.
+              La app solo acepta registros desde 2020 y bloquea columnas identificables.
+            </p>
+            <div class="download-row">
+              <a class="map-link" href="concordia_sispro_indicadores_2020_2023.csv" download>Descargar SISPRO cargado</a>
+              <a class="map-link secondary-link" href="plantilla_datos_anonimos_2020.csv" download>Plantilla 2020+</a>
+            </div>
+            <label class="file-drop">
+              <input id="fileInput" type="file" accept=".csv" />
+              <span>Seleccionar archivo CSV</span>
+              <small>El archivo se procesa solo en esta página.</small>
+            </label>
+            <div class="upload-status" id="uploadStatus">Sin archivo cargado.</div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Columnas recomendadas</h2>
+              <span>Para pedir el Excel al hospital</span>
+            </div>
+            <ul class="check-list">
+              <li>Fecha de atención</li>
+              <li>Edad o fecha de nacimiento</li>
+              <li>Sexo</li>
+              <li>Zona, corregimiento, vereda o barrio</li>
+              <li>Servicio: urgencias, consulta externa, psicología</li>
+              <li>Diagnóstico CIE-10 y descripción</li>
+              <li>Tipo de evento: ansiedad, depresión, violencia, consumo</li>
+              <li>Remisión, control o seguimiento</li>
+              <li>Fuente: RIPS, SI-APS, SIVIGILA, SIHO, hospital o encuesta</li>
+              <li>Latitud y longitud, si la entidad las tiene disponibles</li>
+              <li>Periodo mínimo: 2020 en adelante</li>
+              <li>No incluir nombres, documentos, teléfonos, direcciones ni historias clínicas</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="encuesta">
+        <div class="survey-layout">
+          <article class="panel survey-panel">
+            <div class="panel-heading">
+              <h2>Encuesta comunitaria</h2>
+              <span>Para corregimientos y zonas distantes</span>
+            </div>
+            <form id="surveyForm">
+              <div class="form-grid">
+                <label>
+                  Zona o vereda
+                  <input name="zona" required placeholder="Ej. Bellavista, Rosario, cabecera" />
+                </label>
+                <label>
+                  Edad
+                  <input name="edad" type="number" min="0" max="110" required />
+                </label>
+                <label>
+                  En los últimos días, ánimo bajo
+                  <select name="animo">
+                    <option value="0">Nunca</option>
+                    <option value="1">Algunos días</option>
+                    <option value="2">Más de la mitad de los días</option>
+                    <option value="3">Casi todos los días</option>
+                  </select>
+                </label>
+                <label>
+                  Preocupación o ansiedad
+                  <select name="ansiedad">
+                    <option value="0">Nunca</option>
+                    <option value="1">Algunos días</option>
+                    <option value="2">Más de la mitad de los días</option>
+                    <option value="3">Casi todos los días</option>
+                  </select>
+                </label>
+                <label>
+                  Dificultad para dormir
+                  <select name="sueno">
+                    <option value="0">Nunca</option>
+                    <option value="1">Algunos días</option>
+                    <option value="2">Más de la mitad de los días</option>
+                    <option value="3">Casi todos los días</option>
+                  </select>
+                </label>
+                <label>
+                  ¿Tiene red de apoyo?
+                  <select name="apoyo">
+                    <option value="2">Sí, suficiente</option>
+                    <option value="1">Sí, poca</option>
+                    <option value="0">No</option>
+                  </select>
+                </label>
+                <label class="full">
+                  ¿Ha pensado hacerse daño?
+                  <select name="autolesion">
+                    <option value="0">No</option>
+                    <option value="4">Sí, alguna vez recientemente</option>
+                  </select>
+                </label>
+              </div>
+              <button class="primary-button" type="submit">Guardar respuesta de prueba</button>
+            </form>
+            <div class="survey-result" id="surveyResult"></div>
+          </article>
+          <article class="panel help-panel">
+            <div class="panel-heading">
+              <h2>Ruta de apoyo</h2>
+              <span>Texto editable para el municipio</span>
+            </div>
+            <p>
+              Si una persona está en riesgo inmediato, la app debe orientar hacia atención
+              humana urgente: hospital local, urgencias, comisaría de familia, línea 123
+              o la ruta que defina el equipo municipal.
+            </p>
+            <div class="warning-box">
+              Esta herramienta no reemplaza valoración médica, psicológica ni psiquiátrica.
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="informe">
+        <article class="panel report-panel">
+          <div class="panel-heading">
+            <h2>Resumen para informe</h2>
+            <span>Generado con los filtros actuales</span>
+          </div>
+          <div id="reportText" class="report-text"></div>
+          <button class="ghost-button" id="copyReport">Copiar resumen</button>
+        </article>
+      </section>
+    </main>
+
+    <script src="app.js?v=20260704-real-2020"></script>
+  </body>
+</html>

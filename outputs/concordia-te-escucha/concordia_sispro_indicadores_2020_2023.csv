@@ -1,0 +1,28 @@
+fuente,municipio,departamento,codigo_municipio,indicador,tema,periodo,valor,unidad,nota
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Población total,Demografía,2023,11618,personas,Proyección municipal
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Población cabecera,Demografía,2023,4328,personas,Proyección municipal
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Población resto rural,Demografía,2023,7290,personas,Proyección municipal
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Población hombres,Demografía,2023,6108,personas,Proyección municipal
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Población mujeres,Demografía,2023,5510,personas,Proyección municipal
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Tasa de mortalidad infantil,Salud general,2020,16.666666666666668,tasa,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Tasa de mortalidad menores de 5,Salud general,2020,16.666666666666668,tasa,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Tasa de mortalidad general,Salud general,2020,4.7207624476707934,tasa,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Bajo peso al nacer,Salud materno infantil,2020,5.042016806722689,porcentaje,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Nacidos vivos con 4 controles prenatales,Salud materno infantil,2020,92.43697478991596,porcentaje,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Parto institucional,Salud materno infantil,2020,99.16666666666667,porcentaje,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Parto por cesárea,Salud materno infantil,2020,46.666666666666664,porcentaje,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Tasa de mortalidad infantil,Salud general,2021,20.61855670103093,tasa,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Tasa de mortalidad menores de 5,Salud general,2021,20.61855670103093,tasa,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Tasa de mortalidad general,Salud general,2021,4.8241382334882905,tasa,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Bajo peso al nacer,Salud materno infantil,2021,6.185567010309279,porcentaje,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Nacidos vivos con 4 controles prenatales,Salud materno infantil,2021,93.81443298969072,porcentaje,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Parto institucional,Salud materno infantil,2021,100,porcentaje,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Parto por cesárea,Salud materno infantil,2021,37.11340206185567,porcentaje,Indicador municipal SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,IPS públicas marcadas,Oferta de servicios,2023,4,instituciones,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,IPS privadas marcadas,Oferta de servicios,2023,1,instituciones,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Total IPS marcadas,Oferta de servicios,2023,5,instituciones,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Afiliados subsidiado,Aseguramiento,2023,9440,personas,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Afiliados contributivo,Aseguramiento,2023,366,personas,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Afiliados excepción,Aseguramiento,2023,7,personas,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Afiliados indeterminado,Aseguramiento,2023,1,personas,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Total afiliados,Aseguramiento,2023,9814,personas,Indicador SISPRO

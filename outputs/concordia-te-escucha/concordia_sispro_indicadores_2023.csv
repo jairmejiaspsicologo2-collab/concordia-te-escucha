@@ -1,0 +1,14 @@
+fuente,municipio,departamento,codigo_municipio,indicador,tema,periodo,valor,unidad,nota
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Población total,Demografía,2023,11618,personas,Proyección municipal
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Población cabecera,Demografía,2023,4328,personas,Proyección municipal
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Población resto rural,Demografía,2023,7290,personas,Proyección municipal
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Población hombres,Demografía,2023,6108,personas,Proyección municipal
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Población mujeres,Demografía,2023,5510,personas,Proyección municipal
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,IPS públicas marcadas,Oferta de servicios,2023,4,instituciones,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,IPS privadas marcadas,Oferta de servicios,2023,1,instituciones,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Total IPS marcadas,Oferta de servicios,2023,5,instituciones,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Afiliados subsidiado,Aseguramiento,2023,9440,personas,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Afiliados contributivo,Aseguramiento,2023,366,personas,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Afiliados excepción,Aseguramiento,2023,7,personas,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Afiliados indeterminado,Aseguramiento,2023,1,personas,Indicador SISPRO
+SISPRO - Ficha territorial,Concordia,Magdalena,47205,Total afiliados,Aseguramiento,2023,9814,personas,Indicador SISPRO
